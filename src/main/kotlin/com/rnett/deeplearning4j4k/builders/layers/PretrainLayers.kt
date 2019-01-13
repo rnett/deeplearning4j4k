@@ -12,7 +12,7 @@ import org.nd4j.linalg.activations.impl.ActivationIdentity
 import org.nd4j.linalg.lossfunctions.LossFunctions
 
 @NNConfDSL
-inline fun LayersBuilder.variationalAutoencoderLayer(builder: VariationalAutoencoder.Builder.() -> Unit) =
+inline fun LayersBuilder.variationalAutoencoderLayer(builder: VariationalAutoencoder.Builder.() -> Unit = {}) =
     VariationalAutoencoder.Builder() addWith builder
 
 @NNConfDSL
@@ -27,7 +27,7 @@ inline fun LayersBuilder.variationalAutoencoderLayer(
     lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
     visibleBiasInit: Double = 0.0,
     activation: IActivation? = null,
-    builder: VariationalAutoencoder.Builder.() -> Unit
+    builder: VariationalAutoencoder.Builder.() -> Unit = {}
 ) =
     VariationalAutoencoder.Builder().apply {
         nIn(nIn)
@@ -38,33 +38,6 @@ inline fun LayersBuilder.variationalAutoencoderLayer(
         pzxActivationFn(pzxActivation)
         numSamples(numSamples)
         lossFunction(lossFunction)
-        visibleBiasInit(visibleBiasInit)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.variationalAutoencoderLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    encoderLayerSizes: List<Int> = listOf(100),
-    decoderLayerSizes: List<Int> = listOf(100),
-    reconstructionDistribution: ReconstructionDistribution = GaussianReconstructionDistribution(Activation.TANH),
-    pzxActivation: IActivation = ActivationIdentity(),
-    numSamples: Int = 1,
-    lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
-    visibleBiasInit: Double = 0.0,
-    activation: Activation? = null,
-    builder: VariationalAutoencoder.Builder.() -> Unit
-) =
-    VariationalAutoencoder.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        encoderLayerSizes(*encoderLayerSizes.toIntArray())
-        decoderLayerSizes(*decoderLayerSizes.toIntArray())
-        lossFunction(lossFunction)
-        reconstructionDistribution(reconstructionDistribution)
-        pzxActivationFn(pzxActivation)
-        numSamples(numSamples)
         visibleBiasInit(visibleBiasInit)
         activation(activation)
     } addWith builder
@@ -82,7 +55,7 @@ inline fun LayersBuilder.variationalAutoencoderLayer(
     lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
     visibleBiasInit: Double = 0.0,
     activation: IActivation? = null,
-    builder: VariationalAutoencoder.Builder.() -> Unit
+    builder: VariationalAutoencoder.Builder.() -> Unit = {}
 ) =
     VariationalAutoencoder.Builder().apply {
         nIn(nIn)
@@ -98,36 +71,7 @@ inline fun LayersBuilder.variationalAutoencoderLayer(
     } addWith builder
 
 @NNConfDSL
-inline fun LayersBuilder.variationalAutoencoderLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    encoderLayerSizes: List<Int> = listOf(100),
-    decoderLayerSizes: List<Int> = listOf(100),
-    reconstructionLossFunction: LossFunctions.LossFunction,
-    reconstructionActivationFunction: IActivation,
-    pzxActivation: IActivation = ActivationIdentity(),
-    numSamples: Int = 1,
-    lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
-    visibleBiasInit: Double = 0.0,
-    activation: Activation? = null,
-    builder: VariationalAutoencoder.Builder.() -> Unit
-) =
-    VariationalAutoencoder.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        encoderLayerSizes(*encoderLayerSizes.toIntArray())
-        decoderLayerSizes(*decoderLayerSizes.toIntArray())
-        lossFunction(lossFunction)
-        lossFunction(reconstructionActivationFunction, reconstructionLossFunction)
-        pzxActivationFn(pzxActivation)
-        numSamples(numSamples)
-        visibleBiasInit(visibleBiasInit)
-        activation(activation)
-    } addWith builder
-
-
-@NNConfDSL
-inline fun LayersBuilder.autoEncoderLayer(builder: AutoEncoder.Builder.() -> Unit) =
+inline fun LayersBuilder.autoEncoderLayer(builder: AutoEncoder.Builder.() -> Unit = {}) =
     AutoEncoder.Builder() addWith builder
 
 @NNConfDSL
@@ -139,28 +83,7 @@ inline fun LayersBuilder.autoEncoderLayer(
     lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
     visibleBiasInit: Double = 0.0,
     activation: IActivation? = null,
-    builder: AutoEncoder.Builder.() -> Unit
-) =
-    AutoEncoder.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        corruptionLevel(corruptionLevel)
-        sparsity(sparsity)
-        lossFunction(lossFunction)
-        visibleBiasInit(visibleBiasInit)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.autoEncoderLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    corruptionLevel: Double = 3e-1,
-    sparsity: Double = 0.0,
-    lossFunction: LossFunctions.LossFunction = LossFunctions.LossFunction.RECONSTRUCTION_CROSSENTROPY,
-    visibleBiasInit: Double = 0.0,
-    activation: Activation? = null,
-    builder: AutoEncoder.Builder.() -> Unit
+    builder: AutoEncoder.Builder.() -> Unit = {}
 ) =
     AutoEncoder.Builder().apply {
         nIn(nIn)

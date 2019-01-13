@@ -9,7 +9,7 @@ import org.nd4j.linalg.activations.IActivation
 import org.nd4j.linalg.lossfunctions.ILossFunction
 
 @NNConfDSL
-inline fun LayersBuilder.outputLayer(builder: OutputLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.outputLayer(builder: OutputLayer.Builder.() -> Unit = {}) =
     OutputLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -18,7 +18,7 @@ inline fun LayersBuilder.outputLayer(
     nOut: Int = 0,
     lossFunction: ILossFunction? = null,
     hasBias: Boolean = true,
-    builder: OutputLayer.Builder.() -> Unit
+    builder: OutputLayer.Builder.() -> Unit = {}
 ) =
     OutputLayer.Builder().apply {
         nIn(nIn)
@@ -30,14 +30,14 @@ inline fun LayersBuilder.outputLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.lossLayer(builder: LossLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.lossLayer(builder: LossLayer.Builder.() -> Unit = {}) =
     LossLayer.Builder() addWith builder
 
 @NNConfDSL
 inline fun LayersBuilder.lossLayer(
     lossFunction: ILossFunction,
     hasBias: Boolean = true,
-    builder: LossLayer.Builder.() -> Unit
+    builder: LossLayer.Builder.() -> Unit = {}
 ) =
     LossLayer.Builder().apply {
         lossFunction(lossFunction)
@@ -46,7 +46,7 @@ inline fun LayersBuilder.lossLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.centerLossOutputLayer(builder: CenterLossOutputLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.centerLossOutputLayer(builder: CenterLossOutputLayer.Builder.() -> Unit = {}) =
     CenterLossOutputLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -58,7 +58,7 @@ inline fun LayersBuilder.centerLossOutputLayer(
     gradientCheck: Boolean = false,
     lossFunction: ILossFunction? = null,
     hasBias: Boolean = true,
-    builder: CenterLossOutputLayer.Builder.() -> Unit
+    builder: CenterLossOutputLayer.Builder.() -> Unit = {}
 ) =
     CenterLossOutputLayer.Builder().apply {
         nIn(nIn)
@@ -75,7 +75,7 @@ inline fun LayersBuilder.centerLossOutputLayer(
 @NNConfDSL
 inline fun LayersBuilder.cnn3DLossLayer(
     dataFormat: Convolution3D.DataFormat,
-    builder: Cnn3DLossLayer.Builder.() -> Unit
+    builder: Cnn3DLossLayer.Builder.() -> Unit = {}
 ) =
     Cnn3DLossLayer.Builder(dataFormat) addWith builder
 
@@ -86,7 +86,7 @@ inline fun LayersBuilder.cnn3DLossLayer(
     nIn: Int = 0,
     nOut: Int = 0,
     hasBias: Boolean = true,
-    builder: Cnn3DLossLayer.Builder.() -> Unit
+    builder: Cnn3DLossLayer.Builder.() -> Unit = {}
 ) =
     Cnn3DLossLayer.Builder(dataFormat).apply {
         nIn(nIn)
@@ -97,14 +97,14 @@ inline fun LayersBuilder.cnn3DLossLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.rnnLossLayer(builder: RnnLossLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.rnnLossLayer(builder: RnnLossLayer.Builder.() -> Unit = {}) =
     RnnLossLayer.Builder() addWith builder
 
 @NNConfDSL
 inline fun LayersBuilder.rnnLossLayer(
     rnnLossFunction: ILossFunction,
     hasBias: Boolean = true,
-    builder: RnnLossLayer.Builder.() -> Unit
+    builder: RnnLossLayer.Builder.() -> Unit = {}
 ) =
     RnnLossLayer.Builder().apply {
         lossFunction(rnnLossFunction)
@@ -113,14 +113,14 @@ inline fun LayersBuilder.rnnLossLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.cnnLossLayer(builder: CnnLossLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.cnnLossLayer(builder: CnnLossLayer.Builder.() -> Unit = {}) =
     CnnLossLayer.Builder() addWith builder
 
 @NNConfDSL
 inline fun LayersBuilder.cnnLossLayer(
     cnnLossFunction: ILossFunction,
     hasBias: Boolean = true,
-    builder: CnnLossLayer.Builder.() -> Unit
+    builder: CnnLossLayer.Builder.() -> Unit = {}
 ) =
     CnnLossLayer.Builder().apply {
         lossFunction(cnnLossFunction)
@@ -129,7 +129,7 @@ inline fun LayersBuilder.cnnLossLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.oCNNOutputLayer(builder: OCNNOutputLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.oCNNOutputLayer(builder: OCNNOutputLayer.Builder.() -> Unit = {}) =
     OCNNOutputLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -144,7 +144,7 @@ inline fun LayersBuilder.oCNNOutputLayer(
     nOut: Int = 0,
     lossFunction: ILossFunction? = null,
     hasBias: Boolean = true,
-    builder: OCNNOutputLayer.Builder.() -> Unit
+    builder: OCNNOutputLayer.Builder.() -> Unit = {}
 ) =
     OCNNOutputLayer.Builder().apply {
         hiddenLayerSize(hiddenLayerSize)
@@ -162,7 +162,7 @@ inline fun LayersBuilder.oCNNOutputLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.rnnOutputLayer(builder: RnnOutputLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.rnnOutputLayer(builder: RnnOutputLayer.Builder.() -> Unit = {}) =
     RnnOutputLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -171,7 +171,7 @@ inline fun LayersBuilder.rnnOutputLayer(
     nOut: Int = 0,
     lossFunction: ILossFunction? = null,
     hasBias: Boolean = true,
-    builder: RnnOutputLayer.Builder.() -> Unit
+    builder: RnnOutputLayer.Builder.() -> Unit = {}
 ) =
     RnnOutputLayer.Builder().apply {
         nIn(nIn)

@@ -11,21 +11,51 @@ import org.deeplearning4j.nn.conf.layers.wrapper.BaseWrapperLayer
 import java.util.*
 
 
-class LayersBuilder(globalConfig: NeuralNetConfiguration.Builder,
-                    layerMap: Map<Int, NeuralNetConfiguration.Builder>) :
+class LayersBuilder(
+    val globalConfig: NeuralNetConfiguration.Builder,
+    layerMap: Map<Int, NeuralNetConfiguration.Builder>) :
     NeuralNetConfiguration.ListBuilder(globalConfig, layerMap) {
     constructor(globalConfig: NeuralNetConfiguration.Builder) : this(globalConfig, HashMap<Int, NeuralNetConfiguration.Builder>())
 
+
+    //private var lastNOut: Long = 0
+
+    private fun addLayer(layer: Layer, index: Int? = null) {
+        /*
+        if(lastNOut != 0.toLong()){
+            if(layer is FeedForwardLayer)
+                if(layer.nIn == 0.toLong()) layer.nIn = lastNOut else ;
+            else if(layer is LocallyConnected1D)
+                if(layer.nIn == 0.toLong()) layer.nIn = lastNOut else ;
+            else if(layer is LocallyConnected2D)
+                if(layer.nIn == 0.toLong()) layer.nIn = lastNOut else ;
+        }
+
+        if(layer is FeedForwardLayer)
+            lastNOut = layer.nOut
+        else if(layer is LocallyConnected1D)
+            lastNOut = layer.nOut
+        else if(layer is LocallyConnected2D)
+            lastNOut = layer.nOut
+        else if(layer is Bidirectional)
+            lastNOut = layer.nOut
+        */
+        if (index != null)
+            layer(index, layer)
+        else
+            layer(layer)
+    }
+
     @NNConfDSL
     operator fun <L : Layer> L.unaryPlus(): L{
-        layer(this)
+        addLayer(this)
         return this
     }
 
     @NNConfDSL
     operator fun <L : Layer.Builder<L>> L.unaryPlus(): Layer {
         val l = this.build<Layer>()
-        layer(l)
+        +l
         return l
     }
 
@@ -37,7 +67,7 @@ class LayersBuilder(globalConfig: NeuralNetConfiguration.Builder,
 
     @NNConfDSL
     infix fun <L : Layer> Int.layerAt(layer: L): L{
-        layer(this, layer)
+        addLayer(layer, this)
         return layer
     }
 
@@ -60,5 +90,10 @@ class LayersBuilder(globalConfig: NeuralNetConfiguration.Builder,
     inline infix fun Layer.makeFrozen(mode: Bidirectional.Mode) =
         +FrozenLayer.Builder().apply { layer(this@makeFrozen) }.build()
 
+
+    @NNConfDSL
+    fun globalConfig(builder: NeuralNetConfiguration.Builder.() -> Unit) {
+        globalConfig.apply(builder)
+    }
 
 }

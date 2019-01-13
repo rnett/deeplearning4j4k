@@ -8,7 +8,7 @@ import org.deeplearning4j.nn.conf.layers.LocallyConnected2D
 import org.nd4j.linalg.activations.Activation
 
 @NNConfDSL
-inline fun LayersBuilder.locallyConnected1DLayer(builder: LocallyConnected1D.Builder.() -> Unit) =
+inline fun LayersBuilder.locallyConnected1DLayer(builder: LocallyConnected1D.Builder.() -> Unit = {}) =
     LocallyConnected1D.Builder() addWith builder
 
 @NNConfDSL
@@ -23,7 +23,7 @@ inline fun LayersBuilder.locallyConnected1DLayer(
     convolutionMode: ConvolutionMode = ConvolutionMode.Same,
     hasBias: Boolean = true,
     activation: Activation? = null,
-    builder: LocallyConnected1D.Builder.() -> Unit
+    builder: LocallyConnected1D.Builder.() -> Unit = {}
 ) =
     LocallyConnected1D.Builder().apply {
         nIn(nIn)
@@ -40,7 +40,7 @@ inline fun LayersBuilder.locallyConnected1DLayer(
     } addWith builder
 
 @NNConfDSL
-inline fun LayersBuilder.locallyConnected2DLayer(builder: LocallyConnected2D.Builder.() -> Unit) =
+inline fun LayersBuilder.locallyConnected2DLayer(builder: LocallyConnected2D.Builder.() -> Unit = {}) =
     LocallyConnected2D.Builder() addWith builder
 
 @NNConfDSL
@@ -55,7 +55,7 @@ inline fun LayersBuilder.locallyConnected2DLayer(
     convolutionMode: ConvolutionMode = ConvolutionMode.Same,
     hasBias: Boolean = true,
     activation: Activation? = null,
-    builder: LocallyConnected2D.Builder.() -> Unit
+    builder: LocallyConnected2D.Builder.() -> Unit = {}
 ) =
     LocallyConnected2D.Builder().apply {
         nIn(nIn)

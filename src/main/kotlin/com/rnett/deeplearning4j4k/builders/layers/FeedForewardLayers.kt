@@ -7,11 +7,10 @@ import org.deeplearning4j.nn.conf.dropout.Dropout
 import org.deeplearning4j.nn.conf.dropout.IDropout
 import org.deeplearning4j.nn.conf.layers.*
 import org.deeplearning4j.nn.conf.layers.misc.ElementWiseMultiplicationLayer
-import org.nd4j.linalg.activations.Activation
 import org.nd4j.linalg.activations.IActivation
 
 @NNConfDSL
-inline fun LayersBuilder.denseLayer(builder: DenseLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.denseLayer(builder: DenseLayer.Builder.() -> Unit = {}) =
     DenseLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -20,7 +19,7 @@ inline fun LayersBuilder.denseLayer(
     nOut: Int = 0,
     hasBias: Boolean = true,
     activation: IActivation? = null,
-    builder: DenseLayer.Builder.() -> Unit
+    builder: DenseLayer.Builder.() -> Unit = {}
 ) =
     DenseLayer.Builder().apply {
         nIn(nIn)
@@ -30,23 +29,7 @@ inline fun LayersBuilder.denseLayer(
     } addWith builder
 
 @NNConfDSL
-inline fun LayersBuilder.denseLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    hasBias: Boolean = true,
-    activation: Activation? = null,
-    builder: DenseLayer.Builder.() -> Unit
-) =
-    DenseLayer.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        hasBias(hasBias)
-        activation(activation)
-    } addWith builder
-
-
-@NNConfDSL
-inline fun LayersBuilder.dropoutLayer(builder: DropoutLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.dropoutLayer(builder: DropoutLayer.Builder.() -> Unit = {}) =
     DropoutLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -55,7 +38,7 @@ inline fun LayersBuilder.dropoutLayer(
     nIn: Int = 0,
     nOut: Int = 0,
     activation: IActivation? = null,
-    builder: DropoutLayer.Builder.() -> Unit
+    builder: DropoutLayer.Builder.() -> Unit = {}
 ) =
     DropoutLayer.Builder().apply {
         nIn(nIn)
@@ -70,7 +53,7 @@ inline fun LayersBuilder.dropoutLayer(
     nIn: Int = 0,
     nOut: Int = 0,
     activation: IActivation? = null,
-    builder: DropoutLayer.Builder.() -> Unit
+    builder: DropoutLayer.Builder.() -> Unit = {}
 ) =
     DropoutLayer.Builder().apply {
         nIn(nIn)
@@ -85,7 +68,7 @@ inline fun LayersBuilder.dropoutLayer(
     nIn: Int = 0,
     nOut: Int = 0,
     activation: IActivation? = null,
-    builder: DropoutLayer.Builder.() -> Unit
+    builder: DropoutLayer.Builder.() -> Unit = {}
 ) =
     DropoutLayer.Builder().apply {
         nIn(nIn)
@@ -96,7 +79,7 @@ inline fun LayersBuilder.dropoutLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.embeddingLayer(builder: EmbeddingLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.embeddingLayer(builder: EmbeddingLayer.Builder.() -> Unit = {}) =
     EmbeddingLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -105,22 +88,7 @@ inline fun LayersBuilder.embeddingLayer(
     nOut: Int = 0,
     hasBias: Boolean = true,
     activation: IActivation? = null,
-    builder: EmbeddingLayer.Builder.() -> Unit
-) =
-    EmbeddingLayer.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        hasBias(hasBias)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.embeddingLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    hasBias: Boolean = true,
-    activation: Activation? = null,
-    builder: EmbeddingLayer.Builder.() -> Unit
+    builder: EmbeddingLayer.Builder.() -> Unit = {}
 ) =
     EmbeddingLayer.Builder().apply {
         nIn(nIn)
@@ -131,7 +99,7 @@ inline fun LayersBuilder.embeddingLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.embeddingSequenceLayer(builder: EmbeddingSequenceLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.embeddingSequenceLayer(builder: EmbeddingSequenceLayer.Builder.() -> Unit = {}) =
     EmbeddingSequenceLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -142,26 +110,7 @@ inline fun LayersBuilder.embeddingSequenceLayer(
     inferInputLength: Boolean = true,
     hasBias: Boolean = true,
     activation: IActivation? = null,
-    builder: EmbeddingSequenceLayer.Builder.() -> Unit
-) =
-    EmbeddingSequenceLayer.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        inputLength(inputLength)
-        inferInputLength(inferInputLength)
-        hasBias(hasBias)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.embeddingSequenceLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    inputLength: Int = 1,
-    inferInputLength: Boolean = true,
-    hasBias: Boolean = true,
-    activation: Activation? = null,
-    builder: EmbeddingSequenceLayer.Builder.() -> Unit
+    builder: EmbeddingSequenceLayer.Builder.() -> Unit = {}
 ) =
     EmbeddingSequenceLayer.Builder().apply {
         nIn(nIn)
@@ -174,7 +123,7 @@ inline fun LayersBuilder.embeddingSequenceLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.pReLULayer(builder: PReLULayer.Builder.() -> Unit) =
+inline fun LayersBuilder.pReLULayer(builder: PReLULayer.Builder.() -> Unit = {}) =
     PReLULayer.Builder() addWith builder
 
 @NNConfDSL
@@ -184,24 +133,7 @@ inline fun LayersBuilder.pReLULayer(
     nIn: Int = 0,
     nOut: Int = 0,
     activation: IActivation? = null,
-    builder: PReLULayer.Builder.() -> Unit
-) =
-    PReLULayer.Builder().apply {
-        inputShape(*inputShape.toLongArray())
-        sharedAxes(*sharedAxes.toLongArray())
-        nIn(nIn)
-        nOut(nOut)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.pReLULayer(
-    inputShape: List<Long>,
-    sharedAxes: List<Long>,
-    nIn: Int = 0,
-    nOut: Int = 0,
-    activation: Activation? = null,
-    builder: PReLULayer.Builder.() -> Unit
+    builder: PReLULayer.Builder.() -> Unit = {}
 ) =
     PReLULayer.Builder().apply {
         inputShape(*inputShape.toLongArray())
@@ -213,7 +145,7 @@ inline fun LayersBuilder.pReLULayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.batchNormalizationLayer(builder: BatchNormalization.Builder.() -> Unit) =
+inline fun LayersBuilder.batchNormalizationLayer(builder: BatchNormalization.Builder.() -> Unit = {}) =
     BatchNormalization.Builder() addWith builder
 
 @NNConfDSL
@@ -230,38 +162,7 @@ inline fun LayersBuilder.batchNormalizationLayer(
     gammaConstraints: List<LayerConstraint> = emptyList(),
     cudnnAllowFallback: Boolean = true,
     activation: IActivation? = null,
-    builder: BatchNormalization.Builder.() -> Unit
-) =
-    BatchNormalization.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        decay(decay)
-        eps(eps)
-        minibatch(isMinibatch)
-        lockGammaBeta(lockGammaBeta)
-        gamma(gamma)
-        beta(beta)
-        constrainBeta(*betaConstraints.toTypedArray())
-        constrainGamma(*gammaConstraints.toTypedArray())
-        cudnnAllowFallback(cudnnAllowFallback)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.batchNormalizationLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    decay: Double = 0.9,
-    eps: Double = 1e-5,
-    isMinibatch: Boolean = true,
-    lockGammaBeta: Boolean = false,
-    gamma: Double = 1.0,
-    beta: Double = 0.0,
-    betaConstraints: List<LayerConstraint> = emptyList(),
-    gammaConstraints: List<LayerConstraint> = emptyList(),
-    cudnnAllowFallback: Boolean = true,
-    activation: Activation? = null,
-    builder: BatchNormalization.Builder.() -> Unit
+    builder: BatchNormalization.Builder.() -> Unit = {}
 ) =
     BatchNormalization.Builder().apply {
         nIn(nIn)
@@ -280,7 +181,7 @@ inline fun LayersBuilder.batchNormalizationLayer(
 
 
 @NNConfDSL
-inline fun LayersBuilder.elementWiseMultiplicationLayer(builder: ElementWiseMultiplicationLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.elementWiseMultiplicationLayer(builder: ElementWiseMultiplicationLayer.Builder.() -> Unit = {}) =
     ElementWiseMultiplicationLayer.Builder() addWith builder
 
 @NNConfDSL
@@ -288,20 +189,7 @@ inline fun LayersBuilder.elementWiseMultiplicationLayer(
     nIn: Int = 0,
     nOut: Int = 0,
     activation: IActivation? = null,
-    builder: ElementWiseMultiplicationLayer.Builder.() -> Unit
-) =
-    ElementWiseMultiplicationLayer.Builder().apply {
-        nIn(nIn)
-        nOut(nOut)
-        activation(activation)
-    } addWith builder
-
-@NNConfDSL
-inline fun LayersBuilder.elementWiseMultiplicationLayer(
-    nIn: Int = 0,
-    nOut: Int = 0,
-    activation: Activation? = null,
-    builder: ElementWiseMultiplicationLayer.Builder.() -> Unit
+    builder: ElementWiseMultiplicationLayer.Builder.() -> Unit = {}
 ) =
     ElementWiseMultiplicationLayer.Builder().apply {
         nIn(nIn)

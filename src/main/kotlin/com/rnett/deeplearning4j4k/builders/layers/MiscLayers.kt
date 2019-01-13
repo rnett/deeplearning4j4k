@@ -7,15 +7,15 @@ import org.deeplearning4j.nn.conf.layers.objdetect.Yolo2OutputLayer
 import org.deeplearning4j.nn.conf.layers.util.MaskZeroLayer
 
 @NNConfDSL
-inline fun LayersBuilder.yolo2OutputLayer(builder: Yolo2OutputLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.yolo2OutputLayer(builder: Yolo2OutputLayer.Builder.() -> Unit = {}) =
     Yolo2OutputLayer.Builder() addWith builder
 
 @NNConfDSL
-inline fun LayersBuilder.maskZeroLayer(builder: MaskZeroLayer.Builder.() -> Unit) =
+inline fun LayersBuilder.maskZeroLayer(builder: MaskZeroLayer.Builder.() -> Unit = {}) =
     MaskZeroLayer.Builder() addWith builder
 
 @NNConfDSL
-inline fun LayersBuilder.localResponseNormalizationLayer(builder: LocalResponseNormalization.Builder.() -> Unit) =
+inline fun LayersBuilder.localResponseNormalizationLayer(builder: LocalResponseNormalization.Builder.() -> Unit = {}) =
     LocalResponseNormalization.Builder() addWith builder
 
 @NNConfDSL
@@ -24,7 +24,7 @@ inline fun LayersBuilder.localResponseNormalizationLayer(
     n: Double = 5.0,
     alpha: Double = 1e-4,
     beta: Double = 0.75,
-    builder: LocalResponseNormalization.Builder.() -> Unit
+    builder: LocalResponseNormalization.Builder.() -> Unit = {}
 ) =
     LocalResponseNormalization.Builder(k, alpha, beta).apply {
         n(n)
