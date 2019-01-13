@@ -1,10 +1,11 @@
-package com.rnett.deeplearning4j4k.builders.layers
+package com.rnett.deeplearning4j4k.helpers
 
 import com.rnett.deeplearning4j4k.NNConfDSL
 import com.rnett.deeplearning4j4k.builders.LayersBuilder
-import com.sun.org.apache.xalan.internal.lib.ExsltStrings.padding
 import org.deeplearning4j.nn.conf.ConvolutionMode
-import org.deeplearning4j.nn.conf.layers.*
+import org.deeplearning4j.nn.conf.layers.Convolution1DLayer
+import org.deeplearning4j.nn.conf.layers.Convolution3D
+import org.deeplearning4j.nn.conf.layers.ConvolutionLayer
 
 @NNConfDSL
 inline fun LayersBuilder.convolution1DLayer(builder: Convolution1DLayer.() -> Unit) =

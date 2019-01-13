@@ -1,4 +1,4 @@
-package com.rnett.deeplearning4j4k.builders.layers
+package com.rnett.deeplearning4j4k.helpers
 
 import com.rnett.deeplearning4j4k.NNConfDSL
 import com.rnett.deeplearning4j4k.builders.LayersBuilder

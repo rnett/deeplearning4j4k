@@ -20,6 +20,7 @@ val slf4j_version = "1.7.25"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    compile(kotlin("reflect"))
 
 
     implementation("com.github.rnett:core:$core_version")
