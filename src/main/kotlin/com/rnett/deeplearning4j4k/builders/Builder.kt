@@ -12,10 +12,4 @@ fun NeuralNetConfiguration.Builder.layers(builder: LayersBuilder.() -> Unit) =
 
 class Builder(newConf: NeuralNetConfiguration?) : NeuralNetConfiguration.Builder(newConf){
     constructor() : this(null)
-
-    /*
-    var weightInit
-        override get() = super.weightInit
-        override set(v){ super.weightInit = v }
-    */
 }
