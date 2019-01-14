@@ -1,5 +1,3 @@
-package com.rnett.deeplearning4j4k
-
 import com.rnett.deeplearning4j4k.builders.layers.denseLayer
 import com.rnett.deeplearning4j4k.builders.multiLayerNetwork
 import com.rnett.deeplearning4j4k.builders.multiLayerNetworkConfig
@@ -13,7 +11,7 @@ fun main() {
 
         globalConfig {
             weightInit = WeightInit.XAVIER
-            activation = Activation.RELU
+            activationFn = Activation.RELU.activationFunction
             optimizationAlgo = OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT
         }
 

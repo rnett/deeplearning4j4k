@@ -20,6 +20,7 @@ class LayersBuilder(
 
     //private var lastNOut: Long = 0
 
+    @NNConfDSL
     private fun addLayer(layer: Layer, index: Int? = null) {
         /*
         if(lastNOut != 0.toLong()){
